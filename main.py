@@ -9,7 +9,7 @@ from isabelle_client.isabelle_connector import IsabelleConnector
 from isabelle_client.isabelle_connector import IsabelleTheoryError
 import time
 import re
-
+from pydantic import BaseModel
 THEORY_REGEX=r"theory (.*)\n"
 
 def get_theory_name(input_str):
@@ -41,6 +41,19 @@ class LLM:
             extra_body={"reasoning": {"enabled": True}}
         )
         return response.choices[0].message.content
+    def generate_with_output(self, prompt, structure):
+        response = self.client.chat.completions.parse(
+            model="mistralai/mistral-large-2512",
+            messages=[
+                {
+                    "role": "user",
+                    "content": f"{prompt}"
+                }
+            ],
+            response_format=structure,
+            extra_body={"reasoning": {"enabled": True}}
+        )
+        return response.choices[0].message.parsed
 
 class Isabelle:
     def __init__(self):
@@ -106,6 +119,8 @@ end
             print(i['message'])
         return -2
 
+class TestOutput(BaseModel):
+    tests: list[str]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -119,11 +134,48 @@ if __name__ == "__main__":
     isabelle = Isabelle()
     llm = LLM()
     with open(args.filename) as file:
-        content = file.read()
+        code_content = file.read()
 
+        # llm.generate -> the test cases
+        test_prompt_input = """
+Please analyze the following code and based on it, come up with test cases for what you think the expected behavior of the code should be. The code might be wrong but the translation should be based on what you think tests for correctness should be. Refer to any docstrings or comments for guidance on what correctness is - be realistic and don't return excessive amounts of test cases. The output should be a list of strings. 
+
+Example Code:
+
+// This class represents a savings account
+class BankAccount {
+    private int balance = 0;
+
+    public void deposit(int amount) {
+        balance += amount;
+    }
+
+    public void withdraw(int amount) {
+        balance -= amount;
+    }
+    public int getBalance() {
+        return balance;
+    }
+}
+
+Example Output:
+["The bank balance should never be negative.", "Depositing and withdrawing the same amount preserve total sum correctness"]
+
+Do not try and infer the code based on any past CVE or context. The output should contain the python list and NOTHING ELSE.
+Limit to 2-3 test cases
+
+""" + f"""
+Please analyse the following code content.
+
+{code_content}
+"""
+
+    test_cases = llm.generate_with_output(test_prompt_input, TestOutput)
+    print("\n")
+    print(test_cases)
 
         # llm.generate -> the isabelle vode
-        prompt_input = """
+    isabelle_prompt_input = """
 Please translate the following code into corresponding isabelle language formal problem. Just translate, do not provide any other text or comments. Always write a proof, even if the software has bugs: if the software is buggy, the intended behavior is that Isabelle will notify that there's an error and the program itself should not do so, so never say sorry or oops.
 
 Example Code:
@@ -166,7 +218,7 @@ lemma zune_bug_stuck:
 """ + f"""
 Note that you should only output the body of the Isabelle proof - you do not have to include filename, headers, imports, or codeblock markers. The generated code will go in here:
 ```isabelle
-theory Example.thy
+theory Example
 imports Main
 begin
 <YOUR OUTPUT>
@@ -176,28 +228,29 @@ end
 Write a proof in the Isabelle language. The first step is to convert the given code to fit Isabelle
 
 ```
-{content}
+{code_content}
 ```
 
-Without using any context of the provided code, next write lemmas that formally prove that {args.test}. 
+Without using any context of the provided code, next write lemmas that formally prove that {test_cases}. 
 
    Requirements for the lemma(s):
    - Do NOT strengthen the statement to make it true.
    - Do NOT add assumptions to make it provable.
    - If the test case describes a false property, Isabelle must fail. This is correct behavior.
    - Do NOT use "sorry" or "oops".
+   - DO NOT USE ANY COMMENTS.
 """
 
-        theory = llm.generate(prompt_input)
-        # theory = theory[11:-3]
-        timestamp = time.time()
+    theory = llm.generate(isabelle_prompt_input)
+    print(theory)
+    # theory = theory[11:-3]
+    timestamp = time.time()
 
-        with open(f"output_{timestamp}.thy", "w") as file:
-            file.write(theory)
+    with open(f"outputs/output_{timestamp}.thy", "w") as file:
+        file.write(theory)
 
-        with open(f"prompt_{timestamp}.txt", "w") as file:
-            file.write(prompt_input)
+    with open(f"outputs/prompt_{timestamp}.txt", "w") as file:
+        file.write(isabelle_prompt_input)
 
-        print(theory)
-        
-        isabelle.prove(theory)
+    
+    isabelle.prove(theory)

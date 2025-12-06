@@ -1,8 +1,3 @@
-
-theory Scratch
-    imports Main
-begin
-
 fun n2s :: "nat list ⇒ nat" where
   "n2s (b1 # b2 # xs) = b1 * 256 + b2" |
   "n2s _ = 0"
@@ -52,6 +47,3 @@ lemma allocated_memory_size_correct:
   using assms
   apply (simp add: TLS1_HB_RESPONSE_def TLS1_HB_REQUEST_def PADDING_LEN_def Let_def)
   done
-
-end
-            

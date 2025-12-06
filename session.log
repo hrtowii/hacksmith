@@ -1334,3 +1334,202 @@ session_stop {"session_id": "7ff9c423-f0ca-4e49-87bf-15c2d4bdbc00"}
 OK {"isabelle_id":"4b875a4c83b0","isabelle_name":"Isabelle2025"}
 OK {"task":"fe683d2e-c2f9-40cb-bd02-2ae588a89843"}
 FINISHED {"ok":true,"return_code":0,"task":"fe683d2e-c2f9-40cb-bd02-2ae588a89843"}
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 10754 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 10830 is closed
+HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+aa8d719b-4010-4775-98c2-9daf23240406
+session_start {"session": "Main"}
+
+OK {"isabelle_id":"4b875a4c83b0","isabelle_name":"Isabelle2025"}
+OK {"task":"97164f91-f6ce-4502-b7d6-68c9d2f6d330"}
+117
+NOTE {"kind":"writeln","message":"Session Pure/Pure","verbose":"true","task":"97164f91-f6ce-4502-b7d6-68c9d2f6d330"}
+118
+NOTE {"kind":"writeln","message":"Session Misc/Tools","verbose":"true","task":"97164f91-f6ce-4502-b7d6-68c9d2f6d330"}
+122
+NOTE {"kind":"writeln","message":"Session HOL/HOL (main)","verbose":"true","task":"97164f91-f6ce-4502-b7d6-68c9d2f6d330"}
+122
+NOTE {"kind":"writeln","message":"Session Doc/Main (doc)","verbose":"true","task":"97164f91-f6ce-4502-b7d6-68c9d2f6d330"}
+117
+NOTE {"kind":"writeln","message":"Session Pure/Pure","verbose":"true","task":"97164f91-f6ce-4502-b7d6-68c9d2f6d330"}
+118
+NOTE {"kind":"writeln","message":"Session Misc/Tools","verbose":"true","task":"97164f91-f6ce-4502-b7d6-68c9d2f6d330"}
+122
+NOTE {"kind":"writeln","message":"Session HOL/HOL (main)","verbose":"true","task":"97164f91-f6ce-4502-b7d6-68c9d2f6d330"}
+122
+NOTE {"kind":"writeln","message":"Session Doc/Main (doc)","verbose":"true","task":"97164f91-f6ce-4502-b7d6-68c9d2f6d330"}
+126
+NOTE {"kind":"writeln","message":"Starting session Main ...","verbose":"false","task":"97164f91-f6ce-4502-b7d6-68c9d2f6d330"}
+178
+FINISHED {"session_id":"a2b2eaa0-6e9c-4a8a-8308-2b665ec42014","tmp_dir":"/tmp/isabelle-jovanang/server_session9530455039880651649","task":"97164f91-f6ce-4502-b7d6-68c9d2f6d330"}
+aa8d719b-4010-4775-98c2-9daf23240406
+use_theories {"session_id": "a2b2eaa0-6e9c-4a8a-8308-2b665ec42014", "theories": ["Scratch"], "watchdog_timeout": 0, "master_dir": "."}
+
+OK {"isabelle_id":"4b875a4c83b0","isabelle_name":"Isabelle2025"}
+OK {"task":"ecca6928-2a21-4680-816c-fe9954169a81"}
+161
+NOTE {"percentage":99,"task":"ecca6928-2a21-4680-816c-fe9954169a81","message":"theory Draft.Scratch 99%","kind":"writeln","session":"","theory":"Draft.Scratch"}
+163
+NOTE {"percentage":100,"task":"ecca6928-2a21-4680-816c-fe9954169a81","message":"theory Draft.Scratch 100%","kind":"writeln","session":"","theory":"Draft.Scratch"}
+1662
+FINISHED {"ok":false,"errors":[{"kind":"error","message":"Failed to finish proof\\<^here>:\ngoal (1 subgoal):\n 1. 3 \\<le> length packet \\<Longrightarrow>\n    packet ! 0 = TLS1_HB_REQUEST \\<Longrightarrow>\n    3 + (packet ! Suc 0 * 256 + packet ! 2) \\<le> length packet","pos":{"line":15,"offset":377,"end_offset":379,"file":"Scratch.thy"}}],"nodes":[{"messages":[{"kind":"writeln","message":"consts\n  TLS1_HB_REQUEST :: \"nat\"","pos":{"line":6,"offset":41,"end_offset":51,"file":"Scratch.thy"}},{"kind":"writeln","message":"consts\n  hb_payload :: \"nat list \\<Rightarrow> nat\"","pos":{"line":8,"offset":105,"end_offset":108,"file":"Scratch.thy"}},{"kind":"writeln","message":"Found termination order: \"{}\"","pos":{"line":8,"offset":105,"end_offset":108,"file":"Scratch.thy"}},{"kind":"writeln","message":"theorem no_unchecked_memory_vulnerabilities:\n 3 \\<le> length ?packet \\<Longrightarrow>\n ?packet ! 0 = TLS1_HB_REQUEST \\<Longrightarrow> 3 + hb_payload ?packet \\<le> length ?packet","pos":{"line":15,"offset":377,"end_offset":379,"file":"Scratch.thy"}},{"kind":"error","message":"Failed to finish proof\\<^here>:\ngoal (1 subgoal):\n 1. 3 \\<le> length packet \\<Longrightarrow>\n    packet ! 0 = TLS1_HB_REQUEST \\<Longrightarrow>\n    3 + (packet ! Suc 0 * 256 + packet ! 2) \\<le> length packet","pos":{"line":15,"offset":377,"end_offset":379,"file":"Scratch.thy"}}],"exports":[],"status":{"percentage":100,"unprocessed":0,"running":0,"finished":14,"failed":1,"total":15,"consolidated":true,"canceled":false,"ok":false,"warned":0},"theory_name":"Draft.Scratch","node_name":"Scratch.thy"}],"task":"ecca6928-2a21-4680-816c-fe9954169a81"}
+aa8d719b-4010-4775-98c2-9daf23240406
+session_stop {"session_id": "a2b2eaa0-6e9c-4a8a-8308-2b665ec42014"}
+
+OK {"isabelle_id":"4b875a4c83b0","isabelle_name":"Isabelle2025"}
+OK {"task":"dc1a3b2f-6026-4b13-975b-e737a0297357"}
+FINISHED {"ok":true,"return_code":0,"task":"dc1a3b2f-6026-4b13-975b-e737a0297357"}
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 18940 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 19055 is closed
+HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 23958 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 24168 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 54545 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 54609 is closed
+HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 55890 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 55973 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 56058 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 56116 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 56329 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 56390 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 56690 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 56751 is closed
+HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 57634 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 57864 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 57925 is closed
+HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 58314 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 58375 is closed
+HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+aa8d719b-4010-4775-98c2-9daf23240406
+session_start {"session": "Main"}
+
+OK {"isabelle_id":"4b875a4c83b0","isabelle_name":"Isabelle2025"}
+OK {"task":"6a482876-9101-4eaa-b36d-769b802f0c80"}
+117
+NOTE {"kind":"writeln","message":"Session Pure/Pure","verbose":"true","task":"6a482876-9101-4eaa-b36d-769b802f0c80"}
+118
+NOTE {"kind":"writeln","message":"Session Misc/Tools","verbose":"true","task":"6a482876-9101-4eaa-b36d-769b802f0c80"}
+122
+NOTE {"kind":"writeln","message":"Session HOL/HOL (main)","verbose":"true","task":"6a482876-9101-4eaa-b36d-769b802f0c80"}
+122
+NOTE {"kind":"writeln","message":"Session Doc/Main (doc)","verbose":"true","task":"6a482876-9101-4eaa-b36d-769b802f0c80"}
+117
+NOTE {"kind":"writeln","message":"Session Pure/Pure","verbose":"true","task":"6a482876-9101-4eaa-b36d-769b802f0c80"}
+118
+NOTE {"kind":"writeln","message":"Session Misc/Tools","verbose":"true","task":"6a482876-9101-4eaa-b36d-769b802f0c80"}
+122
+NOTE {"kind":"writeln","message":"Session HOL/HOL (main)","verbose":"true","task":"6a482876-9101-4eaa-b36d-769b802f0c80"}
+122
+NOTE {"kind":"writeln","message":"Session Doc/Main (doc)","verbose":"true","task":"6a482876-9101-4eaa-b36d-769b802f0c80"}
+126
+NOTE {"kind":"writeln","message":"Starting session Main ...","verbose":"false","task":"6a482876-9101-4eaa-b36d-769b802f0c80"}
+178
+FINISHED {"session_id":"2dcb6ea8-4c0e-42d8-972b-6785d2d72dbb","tmp_dir":"/tmp/isabelle-jovanang/server_session3077759132752478361","task":"6a482876-9101-4eaa-b36d-769b802f0c80"}
+aa8d719b-4010-4775-98c2-9daf23240406
+use_theories {"session_id": "2dcb6ea8-4c0e-42d8-972b-6785d2d72dbb", "theories": ["Scratch"], "watchdog_timeout": 0, "master_dir": "."}
+
+OK {"isabelle_id":"4b875a4c83b0","isabelle_name":"Isabelle2025"}
+OK {"task":"0274c5bc-db20-4d8d-9a0e-31de3996947a"}
+161
+NOTE {"percentage":99,"task":"0274c5bc-db20-4d8d-9a0e-31de3996947a","message":"theory Draft.Scratch 99%","kind":"writeln","session":"","theory":"Draft.Scratch"}
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 59263 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 59321 is closed
+HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+aa8d719b-4010-4775-98c2-9daf23240406
+session_start {"session": "Main"}
+
+OK {"isabelle_id":"4b875a4c83b0","isabelle_name":"Isabelle2025"}
+OK {"task":"d3c24fc2-892d-4f7c-b445-db6688ea91b6"}
+117
+NOTE {"kind":"writeln","message":"Session Pure/Pure","verbose":"true","task":"d3c24fc2-892d-4f7c-b445-db6688ea91b6"}
+118
+NOTE {"kind":"writeln","message":"Session Misc/Tools","verbose":"true","task":"d3c24fc2-892d-4f7c-b445-db6688ea91b6"}
+122
+NOTE {"kind":"writeln","message":"Session HOL/HOL (main)","verbose":"true","task":"d3c24fc2-892d-4f7c-b445-db6688ea91b6"}
+122
+NOTE {"kind":"writeln","message":"Session Doc/Main (doc)","verbose":"true","task":"d3c24fc2-892d-4f7c-b445-db6688ea91b6"}
+117
+NOTE {"kind":"writeln","message":"Session Pure/Pure","verbose":"true","task":"d3c24fc2-892d-4f7c-b445-db6688ea91b6"}
+118
+NOTE {"kind":"writeln","message":"Session Misc/Tools","verbose":"true","task":"d3c24fc2-892d-4f7c-b445-db6688ea91b6"}
+122
+NOTE {"kind":"writeln","message":"Session HOL/HOL (main)","verbose":"true","task":"d3c24fc2-892d-4f7c-b445-db6688ea91b6"}
+122
+NOTE {"kind":"writeln","message":"Session Doc/Main (doc)","verbose":"true","task":"d3c24fc2-892d-4f7c-b445-db6688ea91b6"}
+126
+NOTE {"kind":"writeln","message":"Starting session Main ...","verbose":"false","task":"d3c24fc2-892d-4f7c-b445-db6688ea91b6"}
+178
+FINISHED {"session_id":"1fc059e5-d1af-4ed6-8a12-b24db55405e9","tmp_dir":"/tmp/isabelle-jovanang/server_session5742003260135318968","task":"d3c24fc2-892d-4f7c-b445-db6688ea91b6"}
+aa8d719b-4010-4775-98c2-9daf23240406
+use_theories {"session_id": "1fc059e5-d1af-4ed6-8a12-b24db55405e9", "theories": ["Scratch"], "watchdog_timeout": 0, "master_dir": "."}
+
+OK {"isabelle_id":"4b875a4c83b0","isabelle_name":"Isabelle2025"}
+OK {"task":"a0392e8c-ec7c-4f8d-ab07-2713e6abfe42"}
+161
+NOTE {"percentage":99,"task":"a0392e8c-ec7c-4f8d-ab07-2713e6abfe42","message":"theory Draft.Scratch 99%","kind":"writeln","session":"","theory":"Draft.Scratch"}
+163
+NOTE {"percentage":100,"task":"a0392e8c-ec7c-4f8d-ab07-2713e6abfe42","message":"theory Draft.Scratch 100%","kind":"writeln","session":"","theory":"Draft.Scratch"}
+3253
+FINISHED {"ok":false,"errors":[{"kind":"error","message":"Inner syntax error\\<^here>\nFailed to parse prop","pos":{"line":11,"offset":216,"end_offset":219,"file":"Scratch.thy"}},{"kind":"error","message":"Failed to finish proof\\<^here>:\ngoal (1 subgoal):\n 1. 3 \\<le> length pkt \\<Longrightarrow>\n    pkt ! 0 = Suc 0 \\<Longrightarrow> fst (heartbeat_process pkt) \\<le> length pkt - 3","pos":{"line":26,"offset":777,"end_offset":779,"file":"Scratch.thy"}},{"kind":"error","message":"Failed to finish proof\\<^here>:\ngoal (1 subgoal):\n 1. 3 \\<le> length pkt \\<Longrightarrow>\n    pkt ! 0 = Suc 0 \\<Longrightarrow>\n    fst (snd (heartbeat_process pkt)) = 19 + (pkt ! Suc 0 * 256 + pkt ! 2)","pos":{"line":32,"offset":994,"end_offset":996,"file":"Scratch.thy"}},{"kind":"error","message":"Failed to apply initial proof method\\<^here>:\ngoal (1 subgoal):\n 1. 16 \\<le> snd (snd (heartbeat_process pkt))","pos":{"line":36,"offset":1110,"end_offset":1112,"file":"Scratch.thy"}}],"nodes":[{"messages":[{"kind":"writeln","message":"consts\n  TLS1_HB_REQUEST :: \"nat\"","pos":{"line":6,"offset":41,"end_offset":51,"file":"Scratch.thy"}},{"kind":"writeln","message":"consts\n  n2s :: \"nat list \\<Rightarrow> nat\"","pos":{"line":8,"offset":104,"end_offset":114,"file":"Scratch.thy"}},{"kind":"error","message":"Inner syntax error\\<^here>\nFailed to parse prop","pos":{"line":11,"offset":216,"end_offset":219,"file":"Scratch.thy"}},{"kind":"writeln","message":"theorem payload_length_check:\n 3 \\<le> length ?pkt \\<Longrightarrow>\n ?pkt ! 0 = TLS1_HB_REQUEST \\<Longrightarrow>\n fst (?heartbeat_process ?pkt) \\<le> length ?pkt - 3","pos":{"line":26,"offset":777,"end_offset":779,"file":"Scratch.thy"}},{"kind":"error","message":"Failed to finish proof\\<^here>:\ngoal (1 subgoal):\n 1. 3 \\<le> length pkt \\<Longrightarrow>\n    pkt ! 0 = Suc 0 \\<Longrightarrow> fst (heartbeat_process pkt) \\<le> length pkt - 3","pos":{"line":26,"offset":777,"end_offset":779,"file":"Scratch.thy"}},{"kind":"writeln","message":"theorem memory_allocation_check:\n 3 \\<le> length ?pkt \\<Longrightarrow>\n ?pkt ! 0 = TLS1_HB_REQUEST \\<Longrightarrow>\n fst (snd (?heartbeat_process ?pkt)) = 1 + 2 + n2s ?pkt + 16","pos":{"line":32,"offset":994,"end_offset":996,"file":"Scratch.thy"}},{"kind":"error","message":"Failed to finish proof\\<^here>:\ngoal (1 subgoal):\n 1. 3 \\<le> length pkt \\<Longrightarrow>\n    pkt ! 0 = Suc 0 \\<Longrightarrow>\n    fst (snd (heartbeat_process pkt)) = 19 + (pkt ! Suc 0 * 256 + pkt ! 2)","pos":{"line":32,"offset":994,"end_offset":996,"file":"Scratch.thy"}},{"kind":"writeln","message":"theorem padding_check:\n 16 \\<le> snd (snd (?heartbeat_process ?pkt))","pos":{"line":36,"offset":1110,"end_offset":1112,"file":"Scratch.thy"}},{"kind":"error","message":"Failed to apply initial proof method\\<^here>:\ngoal (1 subgoal):\n 1. 16 \\<le> snd (snd (heartbeat_process pkt))","pos":{"line":36,"offset":1110,"end_offset":1112,"file":"Scratch.thy"}}],"exports":[],"status":{"percentage":100,"unprocessed":0,"running":0,"finished":23,"failed":4,"total":27,"consolidated":true,"canceled":false,"ok":false,"warned":0},"theory_name":"Draft.Scratch","node_name":"Scratch.thy"}],"task":"a0392e8c-ec7c-4f8d-ab07-2713e6abfe42"}
+aa8d719b-4010-4775-98c2-9daf23240406
+session_stop {"session_id": "1fc059e5-d1af-4ed6-8a12-b24db55405e9"}
+
+OK {"isabelle_id":"4b875a4c83b0","isabelle_name":"Isabelle2025"}
+OK {"task":"5e78e9b5-8d30-47a5-a982-7a0213932c65"}
+FINISHED {"ok":true,"return_code":0,"task":"5e78e9b5-8d30-47a5-a982-7a0213932c65"}
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 61334 is closed
+Loop <_UnixSelectorEventLoop running=False closed=True debug=False> that handles pid 61394 is closed
+HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+aa8d719b-4010-4775-98c2-9daf23240406
+session_start {"session": "Main"}
+
+OK {"isabelle_id":"4b875a4c83b0","isabelle_name":"Isabelle2025"}
+OK {"task":"87900659-52b9-4073-aa0d-2c97bc368779"}
+117
+NOTE {"kind":"writeln","message":"Session Pure/Pure","verbose":"true","task":"87900659-52b9-4073-aa0d-2c97bc368779"}
+118
+NOTE {"kind":"writeln","message":"Session Misc/Tools","verbose":"true","task":"87900659-52b9-4073-aa0d-2c97bc368779"}
+122
+NOTE {"kind":"writeln","message":"Session HOL/HOL (main)","verbose":"true","task":"87900659-52b9-4073-aa0d-2c97bc368779"}
+122
+NOTE {"kind":"writeln","message":"Session Doc/Main (doc)","verbose":"true","task":"87900659-52b9-4073-aa0d-2c97bc368779"}
+117
+NOTE {"kind":"writeln","message":"Session Pure/Pure","verbose":"true","task":"87900659-52b9-4073-aa0d-2c97bc368779"}
+118
+NOTE {"kind":"writeln","message":"Session Misc/Tools","verbose":"true","task":"87900659-52b9-4073-aa0d-2c97bc368779"}
+122
+NOTE {"kind":"writeln","message":"Session HOL/HOL (main)","verbose":"true","task":"87900659-52b9-4073-aa0d-2c97bc368779"}
+122
+NOTE {"kind":"writeln","message":"Session Doc/Main (doc)","verbose":"true","task":"87900659-52b9-4073-aa0d-2c97bc368779"}
+126
+NOTE {"kind":"writeln","message":"Starting session Main ...","verbose":"false","task":"87900659-52b9-4073-aa0d-2c97bc368779"}
+179
+FINISHED {"session_id":"4d03d53e-c3af-42b8-bf26-fe1b08190108","tmp_dir":"/tmp/isabelle-jovanang/server_session12251304534878698483","task":"87900659-52b9-4073-aa0d-2c97bc368779"}
+aa8d719b-4010-4775-98c2-9daf23240406
+use_theories {"session_id": "4d03d53e-c3af-42b8-bf26-fe1b08190108", "theories": ["Scratch"], "watchdog_timeout": 0, "master_dir": "."}
+
+OK {"isabelle_id":"4b875a4c83b0","isabelle_name":"Isabelle2025"}
+OK {"task":"60dca4e5-ea31-4d6e-9edf-d9ce307d865b"}
+161
+NOTE {"percentage":13,"task":"60dca4e5-ea31-4d6e-9edf-d9ce307d865b","message":"theory Draft.Scratch 13%","kind":"writeln","session":"","theory":"Draft.Scratch"}
+161
+NOTE {"percentage":99,"task":"60dca4e5-ea31-4d6e-9edf-d9ce307d865b","message":"theory Draft.Scratch 99%","kind":"writeln","session":"","theory":"Draft.Scratch"}
+163
+NOTE {"percentage":100,"task":"60dca4e5-ea31-4d6e-9edf-d9ce307d865b","message":"theory Draft.Scratch 100%","kind":"writeln","session":"","theory":"Draft.Scratch"}
+5086
+FINISHED {"ok":false,"errors":[{"kind":"error","message":"Failed to finish proof:\ngoal (1 subgoal):\n 1. 3 \\<le> length msg \\<Longrightarrow> hd msg = Suc 0 \\<Longrightarrow> msg ! 0 \\<noteq> Suc 0 \\<longrightarrow> n2s (tl msg) = 0","pos":{"line":36,"offset":1037,"end_offset":1041,"file":"Scratch.thy"}},{"kind":"error","message":"Outer syntax error\\<^here>: proposition expected,\nbut keyword assumes\\<^here> was found","pos":{"line":38,"offset":1043,"end_offset":1048,"file":"Scratch.thy"}},{"kind":"error","message":"Outer syntax error\\<^here>: command expected,\nbut keyword (\\<^here> was found","pos":{"line":41,"offset":1138,"end_offset":1141,"file":"Scratch.thy"}},{"kind":"error","message":"Failed to finish proof:\ngoal (1 subgoal):\n 1. 3 \\<le> length msg \\<Longrightarrow> hd msg = Suc 0 \\<Longrightarrow> msg ! 0 \\<noteq> Suc 0 \\<longrightarrow> n2s (tl msg) = 0","pos":{"line":45,"offset":1356,"end_offset":1360,"file":"Scratch.thy"}},{"kind":"error","message":"Outer syntax error\\<^here>: proposition expected,\nbut keyword assumes\\<^here> was found","pos":{"line":47,"offset":1362,"end_offset":1367,"file":"Scratch.thy"}},{"kind":"error","message":"Outer syntax error\\<^here>: command expected,\nbut keyword (\\<^here> was found","pos":{"line":50,"offset":1461,"end_offset":1464,"file":"Scratch.thy"}},{"kind":"error","message":"Failed to finish proof:\ngoal (1 subgoal):\n 1. 3 \\<le> length msg \\<Longrightarrow> hd msg = Suc 0 \\<Longrightarrow> msg ! 0 \\<noteq> Suc 0 \\<longrightarrow> n2s (tl msg) = 0","pos":{"line":54,"offset":1673,"end_offset":1677,"file":"Scratch.thy"}},{"kind":"error","message":"Bad context for command \"end\"\\<^here> -- using reset state","pos":{"line":56,"offset":1679,"end_offset":1682,"file":"Scratch.thy"}}],"nodes":[{"messages":[{"kind":"writeln","message":"consts\n  n2s :: \"nat list \\<Rightarrow> nat\"","pos":{"line":6,"offset":41,"end_offset":44,"file":"Scratch.thy"}},{"kind":"writeln","message":"Found termination order: \"{}\"","pos":{"line":6,"offset":41,"end_offset":44,"file":"Scratch.thy"}},{"kind":"writeln","message":"consts\n  s2n :: \"nat \\<Rightarrow> nat list\"","pos":{"line":10,"offset":131,"end_offset":134,"file":"Scratch.thy"}},{"kind":"writeln","message":"Found termination order: \"{}\"","pos":{"line":10,"offset":131,"end_offset":134,"file":"Scratch.thy"}},{"kind":"writeln","message":"consts\n  TLS1_HB_REQUEST :: \"nat\"","pos":{"line":13,"offset":207,"end_offset":217,"file":"Scratch.thy"}},{"kind":"writeln","message":"consts\n  TLS1_HB_RESPONSE :: \"nat\"","pos":{"line":14,"offset":269,"end_offset":279,"file":"Scratch.thy"}},{"kind":"writeln","message":"consts\n  PADDING_LEN :: \"nat\"","pos":{"line":15,"offset":333,"end_offset":343,"file":"Scratch.thy"}},{"kind":"writeln","message":"consts\n  openssl_heartbeat :: \"nat list \\<Rightarrow> nat list\"","pos":{"line":17,"offset":389,"end_offset":392,"file":"Scratch.thy"}},{"kind":"writeln","message":"Found termination order: \"{}\"","pos":{"line":17,"offset":389,"end_offset":392,"file":"Scratch.thy"}},{"kind":"error","message":"Failed to finish proof:\ngoal (1 subgoal):\n 1. 3 \\<le> length msg \\<Longrightarrow> hd msg = Suc 0 \\<Longrightarrow> msg ! 0 \\<noteq> Suc 0 \\<longrightarrow> n2s (tl msg) = 0","pos":{"line":36,"offset":1037,"end_offset":1041,"file":"Scratch.thy"}},{"kind":"error","message":"Outer syntax error\\<^here>: proposition expected,\nbut keyword assumes\\<^here> was found","pos":{"line":38,"offset":1043,"end_offset":1048,"file":"Scratch.thy"}},{"kind":"error","message":"Outer syntax error\\<^here>: command expected,\nbut keyword (\\<^here> was found","pos":{"line":41,"offset":1138,"end_offset":1141,"file":"Scratch.thy"}},{"kind":"error","message":"Failed to finish proof:\ngoal (1 subgoal):\n 1. 3 \\<le> length msg \\<Longrightarrow> hd msg = Suc 0 \\<Longrightarrow> msg ! 0 \\<noteq> Suc 0 \\<longrightarrow> n2s (tl msg) = 0","pos":{"line":45,"offset":1356,"end_offset":1360,"file":"Scratch.thy"}},{"kind":"error","message":"Outer syntax error\\<^here>: proposition expected,\nbut keyword assumes\\<^here> was found","pos":{"line":47,"offset":1362,"end_offset":1367,"file":"Scratch.thy"}},{"kind":"error","message":"Outer syntax error\\<^here>: command expected,\nbut keyword (\\<^here> was found","pos":{"line":50,"offset":1461,"end_offset":1464,"file":"Scratch.thy"}},{"kind":"error","message":"Failed to finish proof:\ngoal (1 subgoal):\n 1. 3 \\<le> length msg \\<Longrightarrow> hd msg = Suc 0 \\<Longrightarrow> msg ! 0 \\<noteq> Suc 0 \\<longrightarrow> n2s (tl msg) = 0","pos":{"line":54,"offset":1673,"end_offset":1677,"file":"Scratch.thy"}},{"kind":"error","message":"Bad context for command \"end\"\\<^here> -- using reset state","pos":{"line":56,"offset":1679,"end_offset":1682,"file":"Scratch.thy"}}],"exports":[],"status":{"percentage":100,"unprocessed":0,"running":0,"finished":37,"failed":8,"total":45,"consolidated":true,"canceled":false,"ok":false,"warned":0},"theory_name":"Draft.Scratch","node_name":"Scratch.thy"}],"task":"60dca4e5-ea31-4d6e-9edf-d9ce307d865b"}
+aa8d719b-4010-4775-98c2-9daf23240406
+session_stop {"session_id": "4d03d53e-c3af-42b8-bf26-fe1b08190108"}
+
+OK {"isabelle_id":"4b875a4c83b0","isabelle_name":"Isabelle2025"}
+OK {"task":"3961fc7e-95b7-4797-ac0d-b40d361b8093"}
+FINISHED {"ok":true,"return_code":0,"task":"3961fc7e-95b7-4797-ac0d-b40d361b8093"}
