@@ -19,8 +19,6 @@ int main(void) {
                 days -= 366;
                 year += 1;
             }
-            /* BUG: if days == 366 in a leap year,
-            nothing happens → infinite loop */
         } else {
             days -= 365;
             year += 1;

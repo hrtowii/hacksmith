@@ -33,6 +33,26 @@ THEORY_REGEX = r"theory (.*)\n"
 load_dotenv(".env")
 TIMESTAMP = time.time()
 
+SYMBOL_MAP = {
+    r"<le>": "≤",
+    r"<ge>": "≥",
+    r"<Longrightarrow>": "⟹",
+    r"<Rightarrow>": "⇒",
+    r"<and>": "∧",
+    r"<or>": "∨",
+    r"<forall>": "∀",
+    r"<exists>": "∃",
+    r"<^here>": "⌂",
+    # add more as needed...
+}
+
+def isabelle_to_unicode(s: str) -> str:
+    """Convert Isabelle-style escapes to Unicode symbols."""
+    for esc, uni in SYMBOL_MAP.items():
+        s = s.replace(esc, uni)
+        s = s.replace("\\", "")
+    return s
+
 
 
 # Now you can access them using os.environ
@@ -344,8 +364,8 @@ class MainScreen(Screen):
             # Action buttons
             Horizontal(
                 Button("🚀 Generate Test Cases", id="generate_tests", variant="primary"),
-                Button("📋 Show Theory", id="show_theory", variant="default"),
                 Button("✓ Run Proof", id="run_proof", variant="success"),
+                Button("📋 Show Theory", id="show_theory", variant="default"),
                 classes="action-buttons"
             ),
             
@@ -495,7 +515,7 @@ Please analyse the following code content.
         if not self.c_code_content or not self.test_cases:
             self.notify("Missing code or test cases!", severity="error")
             return
-        
+
         # Show progress
         progress_screen = ProgressScreen("Generating Isabelle theory...")
         self.app.push_screen(progress_screen)
@@ -506,17 +526,9 @@ Please analyse the following code content.
             exclusive=True,
             thread=True
         )
-        theory = worker.wait()
-        print(theory)
 
-        # theory = ""
-
-        # worker.add_callback(self._on_proof_complete)
-        # theory = self._generate_and_prove_worker()
-        # self._on_proof_complete(theory)
     
     def on_worker_state_changed(self, event: Worker.StateChanged) -> None:
-        # self.log(event)
         if event.state == WorkerState.SUCCESS:
             self._on_proof_complete(event.worker.result)
 
@@ -524,7 +536,7 @@ Please analyse the following code content.
         """Worker function to generate theory and run proof."""
         llm = LLM()
         isabelle = Isabelle()
-        
+
         # Generate Isabelle theory
         isabelle_prompt = f"""
 Please translate the following code into corresponding isabelle language formal problem. Just translate, do not provide any other text or comments. Always write a proof, even if the software has bugs: if the software is buggy, the intended behavior is that Isabelle will notify that there's an error and the program itself should not do so, so never say sorry or oops.
@@ -580,20 +592,39 @@ Write a proof in the Isabelle language. The first step is to convert the given c
 {self.c_code_content}
 ```
 
-Without using any context of the provided code, next write lemmas that formally prove that {self.test_cases}. 
+Without using any context of the provided code, next write lemmas that formally prove that 
+{"\n".join(list(map(lambda x: f"- {x}", self.test_cases)))}. 
 
 Requirements for the lemma(s):
 - Do NOT strengthen the statement to make it true.
 - Do NOT add assumptions to make it provable.
 - If the test case describes a false property, Isabelle must fail. This is correct behavior.
 - Do NOT use "sorry" or "oops".
-- DO NOT USE ANY COMMENTS.
 """
 
         self.theory_content = llm.generate(isabelle_prompt)
 
+        timestamp = time.time()
+        with open(f"outputs/prompt_{timestamp}.txt", "w") as file:
+            file.write(isabelle_prompt)
+
         # Run proof
         success, messages = isabelle.prove(self.theory_content)
+#         success, messages = True, [
+# 'consts',
+# '  deposit :: "int \\<Rightarrow> int \\<Rightarrow> int"',
+# 'Found termination order: "{}"',
+# 'consts',
+# '  withdraw :: "int \\<Rightarrow> int \\<Rightarrow> int"',
+# 'Found termination order: "{}"',
+# 'theorem bank_balance_never_negative:',
+# ' 0 \\<le> ?balance \\<Longrightarrow> 0 \\<le> withdraw ?balance ?amount',
+# 'Failed to finish proof\\<^here>:',
+# 'goal (1 subgoal):',
+# ' 1. 0 \\<le> balance \\<Longrightarrow> amount \\<le> balance'
+#         ]
+
+        
         return self.theory_content, success, messages
     
     def _on_proof_complete(self, result: tuple[str, bool, list[str]]) -> None:
@@ -602,10 +633,12 @@ Requirements for the lemma(s):
 
         theory_content, success, messages = result
         
+        messages = list(map(lambda x: isabelle_to_unicode(x), messages))
+
         self.theory_content = theory_content
         self.proof_success = success
         self.proof_messages = messages
-        
+
         # Save results
         timestamp = time.time()
         with open(f"outputs/output_{timestamp}.thy", "w") as f:
