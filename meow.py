@@ -229,8 +229,8 @@ class TestCaseModal(ModalScreen[list[str] | None]):
                     Button("✎", id=f"edit_{i}", classes="small-button"),
                     Button("🗑", id=f"delete_{i}", classes="small-button danger"),
                     classes="test-case-item"
-                ),
-                id=f"item_{i}"
+                ) #,
+                # id=f"item_{i}"
             )
             list_view.append(item)
 
@@ -324,9 +324,9 @@ class MainScreen(Screen):
         yield Container(
             # File selection
             Vertical(
-                Label("C Code File:", classes="section-title"),
+                Label("Code File:", classes="section-title"),
                 Horizontal(
-                    Input(placeholder="Enter path to C file...", id="file_input"),
+                    Input(placeholder="Enter path to code file...", id="file_input"),
                     Button("Browse...", id="browse", variant="default"),
                     classes="file-input-row"
                 ),
@@ -406,15 +406,6 @@ class MainScreen(Screen):
             self.notify("Please select a valid C file first!", severity="error")
             return
         
-        # Show progress
-        # self.app.push_screen(ProgressScreen("Generating test cases with AI..."))
-        
-        # Run in worker to avoid blocking UI
-        # self.run_worker(
-        #     self._generate_test_cases_worker(),
-        #     exclusive=True,
-        #     thread=True
-        
         test_cases = self._generate_test_cases_worker()
         self._on_test_cases_generated(test_cases)
     
@@ -459,13 +450,14 @@ Please analyse the following code content.
         if user_test:
             test_prompt_input += f"\n\nAdditional context: {user_test}"
         
+        self.app.push_screen(ProgressScreen("Generating test cases with AI..."))
         test_cases = llm.generate_with_output(test_prompt_input, TestOutput)
         return test_cases.tests if test_cases else []
     
     def _on_test_cases_generated(self, test_cases: list[str]) -> None:
         """Callback after test cases are generated."""
         self.test_cases = test_cases
-        # self.app.pop_screen()  # Close progress screen
+        self.app.pop_screen()  # Close progress screen
         
         # Show modal for editing test cases
         def handle_modal_result(result: list[str] | None) -> None:
@@ -642,6 +634,9 @@ Result saved to: outputs/proof_result_{timestamp}.txt
         else:
             self.notify("Proof failed. Check messages for details.", severity="error")
     
+    def action_quit(self) -> None:
+        self.app.exit()
+
     def action_save_session(self) -> None:
         """Save current session to file."""
         if not self.c_code_content:
