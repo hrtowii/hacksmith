@@ -1,0 +1,106 @@
+
+You are translating code into an Isabelle theory.
+
+Your task:
+1. Translate the given C program into a minimal Isabelle model (datatypes, records, functions).
+   - Model the behaviour faithfully, including any bugs.
+   - Do NOT change or fix the code when translating.
+   - Only include semantics relevant to this snippet.
+
+2. Then write TWO lemmas:
+
+   (A) Buggy lemma:
+       - Formalize the test case: "there are no unchecked memory copies"
+       - Use the *buggy* model exactly as translated.
+       - Do NOT modify the property to make it provable.
+       - Do NOT add assumptions to make it true.
+       - If the property is false, Isabelle must reject the lemma. This is correct.
+
+   (B) Fixed lemma:
+       - Define a separate version of the model that includes appropriate safety checks.
+       - Prove the same property again, now for the *fixed* version.
+       - This lemma must be fully proven.
+
+Strict output rules:
+- Output **only** valid Isabelle theory code.
+- No explanations, no comments, no prose, no code fences.
+- Do NOT use "sorry" or "oops".
+- If the buggy lemma is false, let Isabelle fail naturally.
+- The output will be inserted into:
+
+theory Example
+imports Main
+begin
+<YOUR OUTPUT>
+end
+
+Now perform the translation and proofs.
+
+Program:
+```
+
+struct {
+    HeartbeatMessageType type;  // 1 byte: request or the response
+    uint16 payload_length;      // 2 byte: the length of the payload
+    opaque payload[HeartbeatMessage.payload_length];
+    opaque padding[padding_length];
+} HeartbeatMessage;
+/* Allocate memory for the response, size is 1 byte
+ * message type, plus 2 bytes payload length, plus
+ * payload, plus padding
+*/
+
+unsigned int payload;
+unsigned int padding = 16; /* Use minimum padding */
+
+// Read from type field first
+hbtype = *p++; /* After this instruction, the pointer
+                * p will point to the payload_length field */
+
+// Read from the payload_length field from the request packet
+n2s(p, payload); /* Function n2s(p, payload) reads 16 bits
+                  * from pointer p and store the value
+                  * in the INT variable "payload". */
+
+pl = p; // pl points to the beginning of the payload content
+
+if (hbtype == TLS1_HB_REQUEST)
+{
+    unsigned char *buffer, *bp;
+    int r;
+
+    /* Allocate memory for the response, size is 1 byte
+     * message type, plus 2 bytes payload length, plus
+     * payload, plus padding
+     */
+
+    buffer = OPENSSL_malloc(1 + 2 + payload + padding);
+    bp = buffer;
+
+    // Enter response type, length and copy payload *bp++ = TLS1_HB_RESPONSE;
+    s2n(payload, bp);
+
+    // copy payload
+    memcpy(bp, pl, payload);   /* pl is the pointer which
+                                * points to the beginning
+                                * of the payload content */
+    bp += payload;
+
+    // Random padding
+    RAND_pseudo_bytes(bp, padding);
+
+    // this function will copy the 3+payload+padding bytes
+    // from the buffer and put them into the heartbeat response
+    // packet to send back to the request client side.
+    OPENSSL_free(buffer);
+    r = ssl3_write_bytes(s, TLS1_RT_HEARTBEAT, buffer, 3 + payload + padding);
+}
+
+```
+
+Test property:
+```
+
+there are no unchecked memory copies
+
+```
