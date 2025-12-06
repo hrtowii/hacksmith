@@ -1,0 +1,41 @@
+Success: False
+consts
+  TLS1_HB_REQUEST :: "nat"
+consts
+  TLS1_HB_RESPONSE :: "nat"
+consts
+  PADDING_LEN :: "nat"
+consts
+  n2s :: "nat list \<Rightarrow> nat"
+Found termination order: "{}"
+consts
+  s2n :: "nat \<Rightarrow> nat list"
+Found termination order: "{}"
+consts
+  heartbleed :: "nat list \<Rightarrow> nat list"
+Found termination order: "{}"
+theorem payload_length_match:
+ 3 \<le> length ?packet \<Longrightarrow>
+ ?packet ! 0 = TLS1_HB_REQUEST \<Longrightarrow>
+ n2s (drop 1 (heartbleed ?packet)) = n2s (drop 1 ?packet)
+Failed to finish proof\<^here>:
+goal (1 subgoal):
+ 1. 3 \<le> length packet \<Longrightarrow>
+    packet ! 0 = TLS1_HB_REQUEST \<Longrightarrow>
+    n2s (drop (Suc 0)
+          (let payload = n2s (drop (Suc 0) packet)
+           in TLS1_HB_RESPONSE #
+              payload div 256 #
+              payload mod 256 #
+              take payload (drop 3 packet) @ replicate PADDING_LEN 0)) =
+    n2s (drop (Suc 0) packet)
+Outer syntax error\<^here>: proposition expected,
+but keyword assumes\<^here> was found
+Outer syntax error\<^here>: command expected,
+but keyword in\<^here> was found
+Bad context for command "using"\<^here> -- using reset state
+Outer syntax error\<^here>: proposition expected,
+but keyword assumes\<^here> was found
+Outer syntax error\<^here>: command expected,
+but keyword in\<^here> was found
+Bad context for command "using"\<^here> -- using reset state

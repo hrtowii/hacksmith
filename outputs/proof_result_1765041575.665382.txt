@@ -1,0 +1,32 @@
+Success: False
+Inner syntax error\<^here>
+Failed to parse term
+Undefined type name: "HeartbeatMessageType"\<^here>
+Failed to parse type
+Inner syntax error\<^here>
+Failed to parse type
+Inner syntax error\<^here>
+Failed to parse type
+Undefined type name: "HeartbeatMessageType"\<^here>
+Failed to parse type
+Undefined type name: "byte"\<^here>
+Failed to parse type
+theorem payload_length_response_matches_request:
+ ?process_heartbeat ?p = (?buffer, 0) \<Longrightarrow> take 2 (tl ?buffer) = take 2 (tl ?p)
+Undefined fact: "process_heartbeat_def"\<^here>
+theorem response_includes_exact_payload_bytes:
+ ?process_heartbeat ?p = (?buffer, 0) \<Longrightarrow>
+ ?nat_of_word (?n2s (take 2 (tl ?p))) \<le> length ?pl \<Longrightarrow>
+ take (?nat_of_word (?n2s (take 2 (tl ?p)))) (drop 3 ?buffer) =
+ take (?nat_of_word (?n2s (take 2 (tl ?p)))) (drop 3 ?p)
+Undefined fact: "process_heartbeat_def"\<^here>
+theorem memory_allocation_exact:
+ ?process_heartbeat ?p = (?buffer, 0) \<Longrightarrow>
+ length ?buffer = 1 + 2 + ?nat_of_word (?n2s (take 2 (tl ?p))) + 16
+Undefined fact: "process_heartbeat_def"\<^here>
+theorem buffer_overread_vulnerability:
+ length ?pl < ?nat_of_word (?n2s (take 2 (tl ?p))) \<Longrightarrow>
+ \<exists>buffer r.
+    ?process_heartbeat ?p = (buffer, r) \<and>
+    length ?pl < length (drop 3 buffer)
+Undefined fact: "process_heartbeat_def"\<^here>
