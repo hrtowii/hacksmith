@@ -1,0 +1,29 @@
+Success: False
+consts
+  TLS1_HB_REQUEST :: "nat"
+consts
+  n2s :: "nat list ⇒ nat"
+Found termination order: "{}"
+consts
+  s2n :: "nat ⇒ nat list"
+Found termination order: "{}"
+consts
+  heartbeat :: "nat list ⇒ nat list"
+Found termination order: "{}"
+theorem response_payload_length_correct:
+ ?request <noteq> [] ⟹
+ hd ?request = TLS1_HB_REQUEST ⟹
+ 3 ≤ length ?request ⟹
+ length (heartbeat ?request) = 1 + 2 + n2s (drop 1 ?request) + 16
+Failed to finish proof⌂:
+goal (1 subgoal):
+ 1. request <noteq> [] ⟹
+    hd request = TLS1_HB_REQUEST ⟹
+    3 ≤ length request ⟹
+    length
+     (let payload_len = n2s (drop (Suc 0) request)
+      in TLS1_HB_REQUEST #
+         payload_len div 256 #
+         payload_len mod 256 #
+         take payload_len (drop 3 request) @ replicate 16 0) =
+    19 + n2s (drop (Suc 0) request)

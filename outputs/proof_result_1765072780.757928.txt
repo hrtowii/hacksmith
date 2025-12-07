@@ -1,0 +1,27 @@
+Success: False
+consts
+  n2s :: "nat ⇒ nat ⇒ nat"
+Found termination order: "{}"
+consts
+  s2n :: "nat ⇒ nat list"
+Found termination order: "{}"
+consts
+  TLS1_HB_REQUEST :: "nat"
+consts
+  TLS1_HB_RESPONSE :: "nat"
+consts
+  padding_len :: "nat"
+consts
+  process_heartbeat :: "nat list ⇒ nat list"
+Found termination order: "{}"
+theorem heartbeat_response_length_correct:
+ 3 ≤ length ?packet ⟹
+ ?packet ! 0 = TLS1_HB_REQUEST ⟹
+ length (process_heartbeat ?packet) =
+ 3 + n2s (?packet ! 1) (?packet ! 2) + padding_len
+Failed to finish proof⌂:
+goal (1 subgoal):
+ 1. 3 ≤ length packet ⟹
+    packet ! 0 = Suc 0 ⟹
+    min (length packet - 3) (packet ! Suc 0 * 256 + packet ! 2) =
+    packet ! Suc 0 * 256 + packet ! 2

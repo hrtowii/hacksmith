@@ -1,0 +1,25 @@
+Success: False
+consts
+  TLS1_HB_REQUEST :: "nat"
+consts
+  TLS1_HB_RESPONSE :: "nat"
+consts
+  padding_length :: "nat"
+consts
+  n2s :: "nat ⇒ nat ⇒ nat"
+Found termination order: "{}"
+Inner syntax error⌂
+Failed to parse prop
+theorem payload_length_matches_request:
+ ?packet <noteq> [] ⟹
+ ?packet ! 0 = TLS1_HB_REQUEST ⟹
+ 3 ≤ length ?packet ⟹
+ length (take (n2s (?packet ! 1) (?packet ! 2)) (drop 3 ?packet)) =
+ n2s (?packet ! 1) (?packet ! 2)
+Failed to finish proof⌂:
+goal (1 subgoal):
+ 1. packet <noteq> [] ⟹
+    packet ! 0 = TLS1_HB_REQUEST ⟹
+    3 ≤ length packet ⟹
+    min (length packet - 3) (packet ! Suc 0 * 256 + packet ! 2) =
+    packet ! Suc 0 * 256 + packet ! 2

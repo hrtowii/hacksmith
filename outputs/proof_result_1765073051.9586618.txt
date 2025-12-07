@@ -1,0 +1,19 @@
+Success: False
+consts
+  TLS1_HB_REQUEST :: "nat"
+consts
+  TLS1_HB_RESPONSE :: "nat"
+consts
+  tls_heartbeat :: "nat list ⇒ nat list"
+Found termination order: "{}"
+theorem heartbeat_payload_length_matches_request:
+ ?packet <noteq> [] ⟹
+ ?packet ! 0 = TLS1_HB_REQUEST ⟹
+ length (tls_heartbeat ?packet) =
+ 1 + 2 + (?packet ! 1 * 256 + ?packet ! 2) + 16
+Failed to finish proof⌂:
+goal (1 subgoal):
+ 1. packet <noteq> [] ⟹
+    packet ! 0 = TLS1_HB_REQUEST ⟹
+    min (length packet - 3) (packet ! Suc 0 * 256 + packet ! 2) =
+    packet ! Suc 0 * 256 + packet ! 2

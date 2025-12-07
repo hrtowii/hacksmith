@@ -1,0 +1,116 @@
+
+Please translate the following code into corresponding isabelle language formal problem. Just translate, do not provide any other text or comments. Always write a proof, even if the software has bugs: if the software is buggy, the intended behavior is that Isabelle will notify that there's an error and the program itself should not do so, so never say sorry or oops.
+
+Example Code:
+year = ORIGINYEAR;
+while (days > 365) {
+    if (IsLeapYear (year)) {
+        if (days > 366) {
+            days -= days 366;
+            year += 1;
+        }
+    } else {
+        days -= 365;
+        year += 1;
+    }
+}
+
+Example Output:
+fun zune_step :: "nat ⇒ nat ⇒ (nat × nat)" where
+    "zune_step days year =
+        (if days > 365 then
+            (if isLeapYear year then
+                (if days > 366 then (days - 366, year + 1)
+                else (days, year))
+            else (days - 365, year + 1))
+        else (days, year))"
+
+fun zune_loop :: "nat ⇒ nat ⇒ nat ⇒ (nat × nat)" where
+"zune_loop fuel days year =
+    (if fuel = 0 then (days, year)
+    else let (d', y') = zune_step days year
+        in if d' = days ∧ y' = year then (d', y')
+            else zune_loop (fuel - 1) d' y')"
+
+lemma zune_bug_stuck:
+    assumes "isLeapYear year" and "days = 366"
+    shows "zune_step days year = (days, year)"
+    using assms by simp
+
+Note that you should only output the body of the Isabelle proof - you do not have to include filename, headers, imports, or codeblock markers. The generated code will go in here:
+```isabelle
+theory Example
+imports Main
+begin
+<YOUR OUTPUT>
+end
+```
+
+Write a proof in the Isabelle language. The first step is to convert the given code to fit Isabelle
+
+```
+struct {
+    HeartbeatMessageType type;  // 1 byte: request or the response
+    uint16 payload_length;      // 2 byte: the length of the payload
+    opaque payload[HeartbeatMessage.payload_length];
+    opaque padding[padding_length];
+} HeartbeatMessage;
+/* Allocate memory for the response, size is 1 byte
+ * message type, plus 2 bytes payload length, plus
+ * payload, plus padding
+*/
+
+unsigned int payload;
+unsigned int padding = 16; /* Use minimum padding */
+
+// Read from type field first
+hbtype = *p++; /* After this instruction, the pointer
+                * p will point to the payload_length field */
+
+// Read from the payload_length field from the request packet
+n2s(p, payload); /* Function n2s(p, payload) reads 16 bits
+                  * from pointer p and store the value
+                  * in the INT variable "payload". */
+
+pl = p; // pl points to the beginning of the payload content
+
+if (hbtype == TLS1_HB_REQUEST)
+{
+    unsigned char *buffer, *bp;
+    int r;
+
+    /* Allocate memory for the response, size is 1 byte
+     * message type, plus 2 bytes payload length, plus
+     * payload, plus padding
+     */
+
+    buffer = OPENSSL_malloc(1 + 2 + payload + padding);
+    bp = buffer;
+
+    // Enter response type, length and copy payload *bp++ = TLS1_HB_RESPONSE;
+    s2n(payload, bp);
+
+    // copy payload
+    memcpy(bp, pl, payload);   /* pl is the pointer which
+                                * points to the beginning
+                                * of the payload content */
+    bp += payload;
+
+    // Random padding
+    RAND_pseudo_bytes(bp, padding);
+
+    // this function will copy the 3+payload+padding bytes
+    // from the buffer and put them into the heartbeat response
+    // packet to send back to the request client side.
+    OPENSSL_free(buffer);
+    r = ssl3_write_bytes(s, TLS1_RT_HEARTBEAT, buffer, 3 + payload + padding);
+}
+```
+
+Without using any context of the provided code, next write lemmas that formally prove that 
+The memory allocated for the response should be exactly 1 + 2 + payload + padding bytes to prevent buffer overread or overflow.
+Requirements for the lemma(s):
+- Do NOT strengthen the statement to make it true.
+- Do NOT add assumptions to make it provable.
+- If the test case describes a false property, Isabelle must fail. This is correct behavior.
+- Do NOT use "sorry" or "oops".
